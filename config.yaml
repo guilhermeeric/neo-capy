@@ -1,0 +1,23 @@
+rdstation:
+  pull_request:
+    tasks:
+      - name: check approvals
+        state: checking
+        executor: file_with_code_to_be_executed
+
+      - name: notify slack
+        state: merged
+        executor: file_with_code_to_be_executed
+  deploy:
+    tasks:
+      - name: merge master
+        state: deploy_creating
+        executor: file_with_code_to_be_executed
+
+      - name: check ci
+        state: deploy_in_progress_ci
+        executor: file_with_code_to_be_executed
+
+      - name: deploy github
+        state: deploy_in_progress_cd
+        executor: file_with_code_to_be_executed
